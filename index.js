@@ -18,6 +18,18 @@ app.get('/test', (req, res) => {
   return res.json(data);
 })
 
+app.post('/login', (req, res) => {
+  var username = req.body.username;
+  var password = req.body.password;
+  
+  var data = {
+    username: username,
+    password: password,
+  }
+  
+  return res.json(data);
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
