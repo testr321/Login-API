@@ -38,7 +38,7 @@ app.post('/login', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
   
-  client.query("SELECT * FROM users WHERE username = $1 AND password = crypt($2)", [username, password])
+  client.query("SELECT * FROM users WHERE username = $1 AND password = crypt($2, password)", [username, password])
   .then((result) => {
     if (result.rows.length > 0)
     {
