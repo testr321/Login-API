@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const bodyParser = require("body-parser");
+require('dotenv').config();
 
 app.use(cors())
 app.use(bodyParser.json({limit: '50mb'}));
@@ -10,7 +11,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: false, parameterLimit:5
 
 const config = {
   connectionString:
-    "postgres://testing_database_vh02_user:8VlFnQqxZLbyde2vVc8mAYFQCyMh8CXy@dpg-csq8d8bqf0us73ed63f0-a.singapore-postgres.render.com/testing_database_vh02?ssl=true"
+    process.env.DB_CONNECTION_STRING
 };
 
 const { Client } = require('pg');
