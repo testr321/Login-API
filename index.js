@@ -38,7 +38,7 @@ app.post('/login', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
   
-  client.query("SELECT * FROM users WHERE username = $1 AND password = $2", [username, password])
+  client.query("SELECT * FROM users WHERE username = $1 AND password = crypt('$2')", [username, password])
   .then((result) => {
     if (result.rows.length > 0)
     {
@@ -56,7 +56,7 @@ app.post('/register', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
   
-  client.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *", [username, password])
+  client.query("INSERT INTO users (username, password) VALUES ($1, crypt('$2', gen_salt('bf'))) RETURNING *", [username, password])
   .then((result) => {
     // result.rows[0].
     return res.status(200).send("Success");
